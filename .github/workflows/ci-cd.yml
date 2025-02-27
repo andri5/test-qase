@@ -10,38 +10,43 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Bisa diganti dengan windows-latest atau macos-latest jika perlu
+    runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Setup Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 
-      # 3️⃣ Install dependencies (Robot Framework dan Qase)
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install robotframework
-          pip install qase-robotframework  # Paket yang benar
+          pip install qase-robotframework
           pip install robotframework-seleniumlibrary
 
-      # 4️⃣ Jalankan tes dengan listener Qase
+      - name: Debug repository structure
+        run: ls -R
+
+      - name: Debug current working directory
+        run: pwd
+
       - name: Run Robot Framework tests
         env:
-          QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}  # Pastikan token ada di GitHub Secrets
+          QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
           QASE_PROJECT_CODE: "PRJCT"  # Ganti dengan kode project Qase Anda
         run: |
-          robot --listener qase.robotframework.Listener tests/
+          if [ -d "tests" ]; then
+            robot --listener qase.robotframework.Listener tests/
+          else
+            echo "❌ ERROR: Folder 'tests/' tidak ditemukan!" && exit 1
+          fi
 
-      # 5️⃣ Simpan hasil tes sebagai artifact
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: robot-framework-results
-          path: output.xml  # Bisa juga log.html dan report.html
+          path: output.xml
