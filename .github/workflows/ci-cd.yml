@@ -13,7 +13,24 @@ jobs:
     runs-on: ubuntu-latest  # Bisa diganti dengan windows-latest atau macos-latest jika perlu
 
     steps:
-      # 1️⃣ Jalankan tes dengan listener Qase
+      # 1️⃣ Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Setup Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      # 3️⃣ Install dependencies (Robot Framework dan Qase)
+      - name: Install dependencies
+        run: |
+          pip install robotframework
+          pip install robotframework-qase
+          pip install robotframework-seleniumlibrary
+
+      # 4️⃣ Jalankan tes dengan listener Qase
       - name: Run Robot Framework tests
         env:
           QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}  # Pastikan token ada di GitHub Secrets
@@ -21,12 +38,9 @@ jobs:
         run: |
           robot --listener qase.robotframework.Listener tests/
 
-      # 2️⃣  Simpan hasil tes sebagai artifact
+      # 5️⃣ Simpan hasil tes sebagai artifact
       - name: Upload test results
         uses: actions/upload-artifact@v4
         with:
           name: robot-framework-results
           path: output.xml  # Bisa juga log.html dan report.html
-
-
-      
