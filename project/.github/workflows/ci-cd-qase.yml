@@ -32,9 +32,9 @@ jobs:
           QASE_PROJECT_CODE: "PRJCT"  # Replace with your Qase.io project code
         run: |
           if [ -d "path/to/your/tests" ]; then
-            robot --listener qase.robotframework.Listener path/to/your/tests/
+            robot --listener qase.robotframework.Listener project/tests/test-qase.robot
           else
-            echo "❌ ERROR: Folder 'path/to/your/tests/' not found!" && exit 1
+            echo "❌ ERROR: Folder 'project/tests/test-qase.robot' not found!" && exit 1
           fi
 
       - name: Upload test results
