@@ -26,8 +26,9 @@ jobs:
       # 3️⃣ Install dependencies (Robot Framework dan Qase)
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install robotframework
-          pip install robotframework-qase
+          pip install qase-robotframework  # Paket yang benar
           pip install robotframework-seleniumlibrary
 
       # 4️⃣ Jalankan tes dengan listener Qase
