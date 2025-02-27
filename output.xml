@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.12.4 on win32)" generated="2025-02-27T09:58:39.683414" rpa="false" schemaversion="5">
+<suite id="s1" name="Test-Qase" source="D:\test-qase\test-qase.robot">
+<test id="s1-t1" name="Contoh Test Case" line="5">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-02-27T09:58:39.733392" level="INFO">Ini adalah test case pertama</msg>
+<arg>Ini adalah test case pertama</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-02-27T09:58:39.730880" elapsed="0.002512"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>Hello</arg>
+<arg>Hello</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-27T09:58:39.733392" elapsed="0.000000"/>
+</kw>
+<tag>QASEID:1</tag>
+<status status="PASS" start="2025-02-27T09:58:39.730880" elapsed="0.002512"/>
+</test>
+<test id="s1-t2" name="Contoh Test Case Lain" line="10">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-02-27T09:58:39.733392" level="INFO">Ini adalah test case kedua</msg>
+<arg>Ini adalah test case kedua</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-02-27T09:58:39.733392" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>World</arg>
+<arg>World</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-27T09:58:39.733392" elapsed="0.000000"/>
+</kw>
+<tag>QASEID:2</tag>
+<status status="PASS" start="2025-02-27T09:58:39.733392" elapsed="0.000000"/>
+</test>
+<status status="PASS" start="2025-02-27T09:58:39.683414" elapsed="0.051988"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">QASEID:1</stat>
+<stat pass="1" fail="0" skip="0">QASEID:2</stat>
+</tag>
+<suite>
+<stat name="Test-Qase" id="s1" pass="2" fail="0" skip="0">Test-Qase</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-02-27T09:58:39.726370" level="ERROR">Error in file 'D:\test-qase\test-qase.robot' on line 2: Importing library 'QaseLibrary' failed: ModuleNotFoundError: No module named 'QaseLibrary'
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\itlpdp\AppData\Local\Programs\Python\Python312\Scripts\robot.exe
+  C:\Users\itlpdp\AppData\Local\Programs\Python\Python312\python312.zip
+  C:\Users\itlpdp\AppData\Local\Programs\Python\Python312\DLLs
+  C:\Users\itlpdp\AppData\Local\Programs\Python\Python312\Lib
+  C:\Users\itlpdp\AppData\Local\Programs\Python\Python312
+  C:\Users\itlpdp\AppData\Local\Programs\Python\Python312\Lib\site-packages</msg>
+</errors>
+</robot>
