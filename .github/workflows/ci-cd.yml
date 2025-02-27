@@ -1,6 +1,5 @@
-name: CI/CD Pipeline with Qase.io Integration
+name: Run Robot Framework with Qase.io
 
-# Trigger workflow pada push ke branch main atau pull request ke branch main
 on:
   push:
     branches:
@@ -9,37 +8,25 @@ on:
     branches:
       - main
 
-# Jobs yang akan dijalankan
 jobs:
-  run-tests:
-    runs-on: ubuntu-latest  # Menjalankan workflow di runner berbasis Ubuntu
+  test:
+    runs-on: ubuntu-latest  # Bisa diganti dengan windows-latest atau macos-latest jika perlu
 
     steps:
-      # Langkah 1: Checkout kode dari repositori
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # Langkah 2: Setup Python environment
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'  # Sesuaikan dengan versi Python yang Anda gunakan
-
-      # Langkah 3: Install dependencies
-      - name: Install dependencies
-        run: |
-          pip install robotframework
-          pip install qase-robotframework
-
-      # Langkah 4: Jalankan tes
-      - name: Run tests
-        run: |
-          robot --outputdir results tests.robot  # Sesuaikan dengan perintah untuk menjalankan tes Anda
-
-      # Langkah 5: Upload hasil tes ke Qase.io
-      - name: Upload results to Qase.io
+      # 1️⃣ Jalankan tes dengan listener Qase
+      - name: Run Robot Framework tests
         env:
-          QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}  # Menggunakan secret untuk API token
-          QASE_PROJECT_CODE: ${{ secrets.QASE_PROJECT_CODE }}  # Menggunakan secret untuk project code
+          QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}  # Pastikan token ada di GitHub Secrets
+          QASE_PROJECT_CODE: "PRJCT"  # Ganti dengan kode project Qase Anda
         run: |
-          qase upload --code $QASE_PROJECT_CODE --results-dir results --token $QASE_API_TOKEN
+          robot --listener qase.robotframework.Listener tests/
+
+      # 2️⃣  Simpan hasil tes sebagai artifact
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-framework-results
+          path: output.xml  # Bisa juga log.html dan report.html
+
+
+      
