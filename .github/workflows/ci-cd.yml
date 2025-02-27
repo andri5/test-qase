@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -37,7 +37,7 @@ jobs:
       - name: Run Robot Framework tests
         env:
           QASE_API_TOKEN: ${{ secrets.QASE_API_TOKEN }}
-          QASE_PROJECT_CODE: "PRJCT"  # Ganti dengan kode project Qase Anda
+          QASE_PROJECT_CODE: "PD"  # Ganti dengan kode project Qase Anda
         run: |
           if [ -d "tests" ]; then
             robot --listener qase.robotframework.Listener tests/
