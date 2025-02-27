@@ -1,0 +1,3 @@
+robotframework
+qase-robotframework
+robotframework-seleniumlibrary
